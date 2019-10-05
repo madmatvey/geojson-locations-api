@@ -11,11 +11,11 @@ class EnablePostgisExtensions < ActiveRecord::Migration[6.0]
   end
 
   def down
-    execute <<-SQL.squish
-      DROP EXTENSION IF EXISTS postgis;
-      DROP EXTENSION IF EXISTS postgis_topology;
-      DROP EXTENSION IF EXISTS postgis_sfcgal;
-      DROP SCHEMA topology;
-    SQL
+    # execute <<-SQL.squish
+    #   DROP EXTENSION IF EXISTS postgis;
+    #   DROP EXTENSION IF EXISTS postgis_topology;
+    #   DROP EXTENSION IF EXISTS postgis_sfcgal;
+    #   DROP SCHEMA topology;
+    # SQL
   end
 end

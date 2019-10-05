@@ -20,6 +20,7 @@ gem 'sidekiq-limit_fetch'
 
 # application speciality gems
 gem 'activerecord-postgis-adapter'
+gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
 
 group :development, :test do
@@ -28,6 +29,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do

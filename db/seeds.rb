@@ -6,3 +6,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+geojson_filename = Rails.root.join("db", "data", "seeds", "given_areas.json")
+json_string = IO.read(geojson_filename)
+features = RGeo::GeoJSON.decode(json_string)
+features.each { |feature| Area.create!(coordinates: feature.geometry) }
