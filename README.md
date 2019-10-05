@@ -5,14 +5,42 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+- **Ruby 2.5.0**
 
-ruby '2.5.0'
-rails '6.0.0'
+   It is recommended to use [rbenv](https://github.com/rbenv/rbenv) with [ruby-build](https://github.com/rbenv/ruby-build) and then run
+
+   `$ rbenv install 2.5.0`
+
+- **Bundler**
+
+  `$ gem install bundler`
+- **[Overmind](https://github.com/DarthSim/overmind)** to run processes from Procfile in dev.
+
+  ```
+  $ brew install tmux
+  $ brew install overmind
+  ```
 
 * System dependencies
 
 * Configuration
+
+### Setup project
+```
+$ bundle
+$ rails db:create
+$ rails db:migrate
+```
+
+### To run app in development
+
+Run:
+
+```
+$ overmind start
+```
+
+And open url: [localhost:3333](http://localhost:3333)
 
 PostgreSQL. Versions 9.3 and up are supported.
 

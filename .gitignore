@@ -20,3 +20,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Environment files that may contain sensitive data
+.env
+
+# Mac finder artifacts
+.DS_Store

@@ -1,0 +1,36 @@
+AllCops:
+  TargetRubyVersion: 2.5
+  Include:
+    - "**/*.rb"
+    - "Rakefile"
+    - "config.ru"
+    - "lib/**/*.rake"
+  Exclude:
+    - "bundle/**/*"
+    - "vendor/**/*"
+    - "db/**/*"
+    - "script/**"
+    - "node_modules/**/*"
+    - "bin/**"
+    - "*Gemfile*"
+    - "*.gemspec"
+
+Metrics/BlockLength:
+  Exclude:
+    - "config/**/*"
+
+Metrics/MethodLength:
+  Max: 15
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# Commonly used screens these days easily fit more than 80 characters.
+Metrics/LineLength:
+  Max: 120
