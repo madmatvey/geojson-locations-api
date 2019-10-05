@@ -21,6 +21,9 @@ Things you may want to cover:
   $ brew install overmind
   ```
 
+- **Postgres 9.6 and Postgis 2.5**
+  [install with Clover Health's Homebrew Tap](https://github.com/CloverHealth/homebrew-tap#installing-postgres-96-and-postgis-25)
+
 * System dependencies
 
 * Configuration
