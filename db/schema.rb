@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2019_10_06_114155) do
   end
 
   create_table "locations", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
     t.jsonb "geocoder_data"
     t.datetime "created_at", precision: 6, null: false

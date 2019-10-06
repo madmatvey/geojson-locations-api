@@ -6,6 +6,8 @@ class Location::GeocodingService
 
     geocodes = Geocoder.search(location.name)
     coordinates = fabrica.point(*geocodes.first.coordinates)
+    return unless coordinates
+
     location.update(coordinates: coordinates, geocoder_data: geocodes)
   end
 
