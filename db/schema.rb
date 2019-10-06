@@ -15,8 +15,6 @@ ActiveRecord::Schema.define(version: 2019_10_05_140155) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "postgis"
-  enable_extension "postgis_sfcgal"
-  enable_extension "postgis_topology"
 
   create_table "areas", force: :cascade do |t|
     t.geography "coordinates", limit: {:srid=>4326, :type=>"st_polygon", :geographic=>true}

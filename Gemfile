@@ -20,7 +20,6 @@ gem 'sidekiq-limit_fetch'
 
 # application speciality gems
 gem 'activerecord-postgis-adapter'
-gem 'rgeo-activerecord'
 gem 'rgeo-geojson'
 
 group :development, :test do
