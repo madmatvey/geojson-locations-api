@@ -18,12 +18,17 @@ gem 'dotenv-rails'
 gem 'sidekiq'
 gem 'sidekiq-limit_fetch'
 
+# application speciality gems
+gem 'activerecord-postgis-adapter'
+gem 'rgeo-geojson'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'factory_bot_rails'
 end
 
 group :development do

@@ -1,9 +1,14 @@
-# README
+# GeoJSON with Rails PostgreSQL and PostGIS 📐🌍🔍
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## API-only Ruby on Rails app.
 
-Things you may want to cover:
+The goal of the application is to determine whether an incoming geographical Location is inside at least one of the given areas.
+
+### API endpoints
+
+`GET /api/v1/areas` fetch list of the given areas in GeoJSON format
+
+### Setup environment
 
 - **Ruby 2.5.0**
 
@@ -21,20 +26,20 @@ Things you may want to cover:
   $ brew install overmind
   ```
 
-* System dependencies
+- **Postgres 9.6 and Postgis 2.5**
+  [install with Clover Health's Homebrew Tap](https://github.com/CloverHealth/homebrew-tap#installing-postgres-96-and-postgis-25)
 
-* Configuration
 
 ### Setup project
 ```
 $ bundle
 $ rails db:create
+$ rails db:gis:setup
 $ rails db:migrate
+$ rails db:seed
 ```
 
 ### To run app in development
-
-Run:
 
 ```
 $ overmind start
@@ -42,34 +47,11 @@ $ overmind start
 
 And open url: [localhost:3333](http://localhost:3333)
 
-PostgreSQL. Versions 9.3 and up are supported.
 
-Install the pg driver:
-   `gem install pg`
-On macOS with Homebrew:
-   `gem install pg -- --with-pg-config=/usr/local/bin/pg_config`
-On macOS with MacPorts:
-   `gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config`
-On Windows:
-   `gem install pg`
-       Choose the win32 build.
-       Install PostgreSQL and put its /bin directory on your path.
+### To run the test suite
 
-Configure Using Gemfile
-`gem 'pg'`
-
-* Database creation
-
-`rails db:setup`
-
-* Database initialization
-
-`rails dm:migrate`
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
+```
+$ bundle exec rspec
+```
 
 * Deployment instructions
-
-* ...
