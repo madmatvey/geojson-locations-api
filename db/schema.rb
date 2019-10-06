@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_05_140155) do
+ActiveRecord::Schema.define(version: 2019_10_06_114155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 2019_10_05_140155) do
     t.geography "coordinates", limit: {:srid=>4326, :type=>"st_polygon", :geographic=>true}
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name"
+    t.geography "coordinates", limit: {:srid=>4326, :type=>"st_point", :geographic=>true}
+    t.jsonb "geocoder_data"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_locations_on_name", unique: true
   end
 
 end
