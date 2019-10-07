@@ -11,7 +11,7 @@ describe Location::GeocodingWorker do
     it "calls GeocodingService" do
       allow(Location::GeocodingService).to receive(:new).and_return(service_instance)
 
-      expect(service_instance).to receive(:call).with(location: location)
+      expect(service_instance).to receive(:call).with(location: location) # rubocop:disable RSpec/MessageSpies
       described_class.new.perform(location.id)
     end
   end
