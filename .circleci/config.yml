@@ -40,7 +40,7 @@ jobs:
         command: |
           gem update --system
           gem install bundler
-          bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+          bundle install
     - save_cache:
         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
         paths:
@@ -64,7 +64,7 @@ jobs:
     - run:
         working_directory: ~/geojson-rails
         name: Bundle Install
-        command: bundle install --path=vendor/bundle --jobs=4 --retry=3
+        command: bundle install
     - run:
         name: RSpec
         command: bundle exec rspec --format doc --require spec_helper --format progress spec
