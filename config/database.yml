@@ -17,5 +17,6 @@ test:
 production:
   <<: *default
   database: geojson_rails_postgres_production
+  url: <%= ENV.fetch('DATABASE_URL', '').sub(/^postgres/, "postgis") %>
   username: geojson_rails_postgres
   password: <%= ENV['GEOJSON_RAILS_POSTGRES_DATABASE_PASSWORD'] %>
