@@ -1,0 +1,107 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/geojson-rails
+    parallelism: 1
+    shell: /bin/bash --login
+    # CircleCI 2.0 does not support environment variables that refer to each other the same way as 1.0 did.
+    # If any of these refer to each other, rewrite them so that they don't or see https://circleci.com/docs/2.0/env-vars/#interpolating-environment-variables-to-set-other-environment-variables .
+    environment:
+      CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
+      CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
+    docker:
+    - image: circleci/ruby:2.5.0
+      environment:
+          BUNDLE_JOBS: 4
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          PGUSER: test
+          RAILS_ENV: test
+    - image: circleci/postgres:9.6.10-alpine-postgis
+      environment:
+          POSTGRES_USER: test
+          POSTGRES_DB: geojson_rails_postgres_test
+          POSTGRES_PASSWORD: ""
+
+    steps:
+    - checkout
+    # Prepare for artifact and test results  collection equivalent to how it was done on 1.0.
+    # In many cases you can simplify this from what is generated here.
+    # 'See docs on artifact collection here https://circleci.com/docs/2.0/artifacts/'
+    - run: mkdir -p $CIRCLE_ARTIFACTS $CIRCLE_TEST_REPORTS
+    # bundler
+    - restore_cache:
+        keys:
+          - geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+          - geojson-rails-bundle-v2-
+    - run:
+        name: Bundle Install
+        command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+    - save_cache:
+        key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+    # Database
+    - run:
+        name: Wait for DB
+        command: dockerize -wait tcp://localhost:5432 -timeout 1m
+    - run:
+        command: bundle exec rake db:create db:schema:load --trace
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+    - run: bundle exec rake lint
+    - run:
+        working_directory: ~/geojson-rails
+        name: Bundler
+        command: gem install bundler
+    - run:
+        working_directory: ~/geojson-rails
+        name: Bundle Install
+        command: bundle install --path=vendor/bundle --jobs=4 --retry=3
+    - run:
+        name: RSpec
+        command: bundle exec rspec --format doc --require spec_helper --format progress spec
+        environment:
+          RAILS_ENV: test
+          RACK_ENV: test
+    - store_test_results:
+        path: /tmp/circleci-test-results
+    - store_artifacts:
+        path: ~/geojson-rails/coverage
+    - store_artifacts:
+        path: /tmp/circleci-test-results
+
+  #
+  # deploy:
+  #   docker:
+  #     - image: circleci/ruby:2.5.0
+  #   working_directory: ~/geojson-rails
+  #   steps:
+  #     - checkout
+  #     - restore_cache:
+  #         keys:
+  #           - geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+  #           - geojson-rails-bundle-v2-
+  #     - run:
+  #         name: Bundle Install
+  #         command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+  #     - save_cache:
+  #         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+  #         paths:
+  #           - vendor/bundle
+  #     - run:
+  #         name: Deploy to heroku if tests pass and branch is Master
+  #         command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      # - deploy:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: master
