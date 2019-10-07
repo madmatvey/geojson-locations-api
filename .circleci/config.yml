@@ -10,7 +10,7 @@ jobs:
       CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
       CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
     docker:
-    - image: circleci/ruby:2.5.0
+    - image: circleci/ruby:2.5.0-stretch
       environment:
           BUNDLE_JOBS: 4
           BUNDLE_RETRY: 3
@@ -37,10 +37,7 @@ jobs:
           - geojson-rails-bundle-v2-
     - run:
         name: Bundle Install
-        command: |
-          gem update --system
-          gem install bundler
-          bundle install
+        command: bundle install
     - save_cache:
         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
         paths:
