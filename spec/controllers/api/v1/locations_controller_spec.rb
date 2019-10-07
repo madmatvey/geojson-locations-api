@@ -5,6 +5,7 @@ require "rails_helper"
 describe Api::V1::LocationsController, type: :controller do # rubocop:disable Metrics/BlockLength
   describe ".create" do
     subject(:create_request) { post :create, params: { name: name } }
+
     let(:name) { "Wroclaw" }
 
     context "when name has not already been taken" do

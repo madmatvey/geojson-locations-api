@@ -9,7 +9,7 @@ describe Location::GeocodingService do
     context "when name can be geolocated" do
       let(:name) { "Wroclaw" }
 
-      it "updates geocoder_data" do
+      it "updates geocoder_data" do # rubocop:disable RSpec/MultipleExpectations
         VCR.use_cassette("location-#{name.downcase}-geocodes") do
           described_class.new.call(location: location)
         end
