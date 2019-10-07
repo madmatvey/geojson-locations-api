@@ -37,7 +37,10 @@ jobs:
           - geojson-rails-bundle-v2-
     - run:
         name: Bundle Install
-        command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+        command: |
+          gem update --system
+          gem install bundler
+          bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - save_cache:
         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
         paths:
@@ -55,7 +58,9 @@ jobs:
     - run:
         working_directory: ~/geojson-rails
         name: Bundler
-        command: gem install bundler
+        command: |
+          gem update --system
+          gem install bundler
     - run:
         working_directory: ~/geojson-rails
         name: Bundle Install
