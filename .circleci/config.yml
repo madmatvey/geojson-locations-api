@@ -38,7 +38,7 @@ jobs:
     - run:
         name: Bundle Install
         command: |
-          gem update bundler --path=vendor/bundle
+          gem update bundler
           bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
     - save_cache:
         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
