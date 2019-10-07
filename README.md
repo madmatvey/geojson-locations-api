@@ -8,6 +8,10 @@ The goal of the application is to determine whether an incoming geographical Loc
 
 `GET /api/v1/areas` fetch list of the given areas in GeoJSON format
 
+`POST /api/v1/locations` create a location
+      IN: location name (text)
+      OUT: ID of created location
+
 ### Setup environment
 
 - **Ruby 2.5.0**

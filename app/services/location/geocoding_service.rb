@@ -5,10 +5,13 @@ class Location::GeocodingService
     return unless location
 
     geocodes = Geocoder.search(location.name)
+    location.update(geocoder_data: geocodes)
+    return unless geocodes.first
+
     coordinates = fabrica.point(*geocodes.first.coordinates)
     return unless coordinates
 
-    location.update(coordinates: coordinates, geocoder_data: geocodes)
+    location.update(coordinates: coordinates)
   end
 
   private

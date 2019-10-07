@@ -35,3 +35,9 @@ end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
 end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'vcr'
+  gem 'webmock'
+end
