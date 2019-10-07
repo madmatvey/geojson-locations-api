@@ -2,13 +2,13 @@
 
 require "rails_helper"
 
-RSpec.describe Api::V1::AreasController, type: :controller do
+describe Api::V1::AreasController, type: :controller do
   include FixtureHelper
   let(:geojson) { json_example("given_areas") }
   let(:geojson_decoded) { RGeo::GeoJSON.decode(geojson) }
 
   describe ".index" do
-    subject(:index) { get :index }
+    subject(:index_request) { get :index }
 
     before do
       geojson_decoded.each do |decode|
@@ -17,12 +17,12 @@ RSpec.describe Api::V1::AreasController, type: :controller do
     end
 
     it "returns area json" do
-      index
+      index_request
       expect(subject_json).to match(geojson)
     end
 
     it "does not raise an exception" do
-      expect { index }.not_to raise_error
+      expect { index_request }.not_to raise_error
     end
   end
 

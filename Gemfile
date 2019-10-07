@@ -21,6 +21,7 @@ gem 'sidekiq-limit_fetch'
 # application speciality gems
 gem 'activerecord-postgis-adapter'
 gem 'rgeo-geojson'
+gem 'geocoder'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -33,4 +34,10 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+group :test do
+  gem 'simplecov', require: false
+  gem 'vcr'
+  gem 'webmock'
 end
