@@ -4,6 +4,10 @@
 
 The goal of the application is to determine whether an incoming geographical Location is inside at least one of the given areas.
 
+### CI status
+
+[![CircleCI](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master.svg?style=svg&circle-token=096539165698bd02eda4714a1beea5b468e12131)](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master)
+
 ### API endpoints
 
 `GET /api/v1/areas` fetch list of the given areas in GeoJSON format

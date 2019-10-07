@@ -2,10 +2,11 @@
 
 require "sidekiq-limit_fetch"
 
+uri = URI.parse(ENV.fetch("REDISTOGO_URL", "redis://localhost:6379"))
 redis = {
-  host: ENV.fetch("REDIS_HOST", "localhost"),
-  port: ENV.fetch("REDIS_PORT", 6379),
-  db: ENV.fetch("REDIS_SIDEKIQ_DB", 1)
+  host: uri.host,
+  port: uri.port,
+  password: uri.password
 }
 
 Sidekiq.configure_client do |config|

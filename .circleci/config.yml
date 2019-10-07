@@ -79,35 +79,38 @@ jobs:
     - store_artifacts:
         path: /tmp/circleci-test-results
 
-  #
-  # deploy:
-  #   docker:
-  #     - image: circleci/ruby:2.5.0
-  #   working_directory: ~/geojson-rails
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         keys:
-  #           - geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-  #           - geojson-rails-bundle-v2-
-  #     - run:
-  #         name: Bundle Install
-  #         command: bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
-  #     - save_cache:
-  #         key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
-  #         paths:
-  #           - vendor/bundle
-  #     - run:
-  #         name: Deploy to heroku if tests pass and branch is Master
-  #         command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+  deploy:
+    docker:
+      - image: circleci/ruby:2.5.0
+    working_directory: ~/geojson-rails
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - geojson-rails-bundle-v2-
+      - run:
+          name: Bundle Install
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+            bundle check --path=vendor/bundle || bundle install --path=vendor/bundle --jobs=4 --retry=3
+      - save_cache:
+          key: geojson-rails-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Deploy to heroku if tests pass and branch is Master
+          command: git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 workflows:
   version: 2
   build-deploy:
     jobs:
       - build
-      # - deploy:
-      #     requires:
-      #       - build
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
