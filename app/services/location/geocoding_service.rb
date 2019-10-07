@@ -8,7 +8,7 @@ class Location::GeocodingService
     location.update(geocoder_data: geocodes)
     return unless geocodes.first
 
-    coordinates = fabrica.point(*geocodes.first.coordinates)
+    coordinates = factory.point(*geocodes.first.coordinates)
     return unless coordinates
 
     location.update(coordinates: coordinates)
@@ -16,7 +16,7 @@ class Location::GeocodingService
 
   private
 
-  def fabrica
+  def factory
     RGeo::Geographic.spherical_factory(srid: 4326)
   end
 end

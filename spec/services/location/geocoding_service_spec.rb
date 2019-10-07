@@ -16,6 +16,13 @@ describe Location::GeocodingService do
         expect(location.reload.geocoder_data.first["data"]["lat"]).to match("51.1089776")
         expect(location.reload.geocoder_data.first["data"]["lon"]).to match("17.0326689")
       end
+
+      it "updates coordinates" do
+        VCR.use_cassette("location-#{name.downcase}-geocodes") do
+          described_class.new.call(location: location)
+        end
+        expect(location.reload.coordinates).to be_kind_of(RGeo::Geographic::SphericalPointImpl)
+      end
     end
   end
 end
