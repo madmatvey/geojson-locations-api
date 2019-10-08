@@ -17,6 +17,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'dotenv-rails'
 gem 'sidekiq', '< 6.0'
 gem 'sidekiq-limit_fetch'
+gem 'kramdown'
 
 # application speciality gems
 gem 'activerecord-postgis-adapter'
