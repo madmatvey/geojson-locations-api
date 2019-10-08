@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "simplecov_profile"
+Coveralls.wear!("rails")
 SimpleCov.start "rails customized"
 
 require "spec_helper"
