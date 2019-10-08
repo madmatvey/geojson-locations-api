@@ -4,6 +4,6 @@ require "rails/application_controller"
 
 class StaticController < Rails::ApplicationController
   def index
-    render html: Kramdown::Document.new(File.open("./README.md")).to_html, layout: false
+    render html: Kramdown::Document.new(File.read("./README.md")).to_html, layout: false
   end
 end
