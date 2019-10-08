@@ -10,8 +10,8 @@ class Api::V1::LocationsController < ApplicationController
   end
 
   def show
-    location = Location.find(params[:id])
-    return json_response(error: location.errors) unless location.id
+    location = Location.where(id: params[:id]).first
+    return json_response(errors: { location: "not found" }) unless location
 
     json_response(Location::FetchInfoService.new.call(location: location))
   end
