@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :location do
-    name { "MyString" }
+    sequence(:name) { |id| "Test location #{id}" }
     coordinates { nil }
     geocoder_data { nil }
   end
