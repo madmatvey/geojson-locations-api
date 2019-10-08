@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 require "simplecov"
-require "coveralls"
+# Check to see if we're inside a CI environment. If not, we don't want to override the default formatter.
+if ENV["CI"]
+  require "coveralls"
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+end
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter,
-                                                                Coveralls::SimpleCov::Formatter])
 SimpleCov.minimum_coverage 100
 SimpleCov.profiles.define "rails customized" do
   load_profile "rails"
