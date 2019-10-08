@@ -20,6 +20,10 @@ The goal of the application is to determine whether an incoming geographical Loc
       IN: location name (text)
       OUT: ID of created location
 
+`GET /api/v1/locations/:id` fetch location by ID
+      IN: Location ID
+      OUT: Location name, coordinates, inside? (true/false)
+
 ### Setup environment
 
 - **Ruby 2.5.0**
