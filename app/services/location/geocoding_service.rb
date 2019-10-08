@@ -8,7 +8,7 @@ class Location::GeocodingService
     location.update(geocoder_data: geocodes)
     return unless geocodes.first
 
-    coordinates = factory.point(*geocodes.first.coordinates)
+    coordinates = factory.point(geocodes.first.data["lon"], geocodes.first.data["lat"])
     return unless coordinates
 
     location.update(coordinates: coordinates)
