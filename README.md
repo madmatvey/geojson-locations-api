@@ -4,9 +4,11 @@
 
 The goal of the application is to determine whether an incoming geographical Location is inside at least one of the given areas.
 
-### CI status
+### Code status
 
 [![CircleCI](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master.svg?style=svg&circle-token=096539165698bd02eda4714a1beea5b468e12131)](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master)
+
+[![Coverage Status](https://coveralls.io/repos/github/madmatvey/geojson-locations-api/badge.svg?branch=master)](https://coveralls.io/github/madmatvey/geojson-locations-api?branch=master)
 
 ### API endpoints
 
