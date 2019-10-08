@@ -4,6 +4,10 @@
 
 The goal of the application is to determine whether an incoming geographical Location is inside at least one of the given areas.
 
+### Source code
+
+[github.com/madmatvey/geojson-locations-api](https://github.com/madmatvey/geojson-locations-api)
+
 ### Code status
 
 [![CircleCI](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master.svg?style=svg&circle-token=096539165698bd02eda4714a1beea5b468e12131)](https://circleci.com/gh/madmatvey/geojson-locations-api/tree/master) [![Coverage Status](https://coveralls.io/repos/github/madmatvey/geojson-locations-api/badge.svg?branch=master)](https://coveralls.io/github/madmatvey/geojson-locations-api?branch=master)
@@ -62,4 +66,12 @@ And open url: [localhost:3333](http://localhost:3333)
 $ bundle exec rspec
 ```
 
-* Deployment instructions
+### Deployment instructions
+
+Application will [deploy to Heroku with CircleCI](https://circleci.com/docs/2.0/deployment-integrations/#heroku) automaticaly when all RSpec tests are green and code coverage 100% in master branch.
+
+Forks can setup Heroku manually and deploy with:
+
+```
+$ git push heroku master
+```
