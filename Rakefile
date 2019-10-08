@@ -13,5 +13,9 @@ unless Rails.env.production?
     task.requires << "rubocop-rspec"
   end
 
+  require "coveralls/rake/task"
+  Coveralls::RakeTask.new
+  task test_with_coveralls: [:spec, :features, "coveralls:push"]
+
   task(:lint).clear.enhance(%i[rubocop])
 end

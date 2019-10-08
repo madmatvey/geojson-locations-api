@@ -68,7 +68,7 @@ jobs:
         command: bundle install
     - run:
         name: RSpec
-        command: bundle exec rspec --format doc --require spec_helper --format progress spec
+        command: bundle exec rake :test_with_coveralls --format doc --require spec_helper --format progress spec
         environment:
           RAILS_ENV: test
           RACK_ENV: test
