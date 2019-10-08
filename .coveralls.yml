@@ -1,2 +1,2 @@
-service_name: circleci
+service_name: circle-ci
 repo_token: $COVERALLS_TOKEN
