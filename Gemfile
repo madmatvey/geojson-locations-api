@@ -15,7 +15,7 @@ gem 'puma', '~> 3.12'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'dotenv-rails'
-gem 'sidekiq', '< 6.0'
+gem 'sidekiq', '< 7.0'
 gem 'sidekiq-limit_fetch'
 gem 'kramdown'
 
